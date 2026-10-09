@@ -30,6 +30,9 @@ export WERF_REPO=registry.home.arpa:5000/werf-demo
 export WERF_NAMESPACE=werf-demo-development
 export WERF_RELEASE=werf-demo-development
 
+# Optional: expose this local demonstration through the cluster's ingress.
+export WERF_INGRESS_HOST=werf-demo.localhost
+
 # Create the isolated namespace if it does not exist.
 kubectl create namespace "$WERF_NAMESPACE" --dry-run=client -o yaml | kubectl apply -f -
 
@@ -39,6 +42,9 @@ werf converge \
   --repo "$WERF_REPO" \
   --namespace "$WERF_NAMESPACE" \
   --release "$WERF_RELEASE" \
+  --set ingress.enabled=true \
+  --set ingress.className=traefik \
+  --set ingress.host="$WERF_INGRESS_HOST" \
   --atomic
 ```
 
@@ -55,6 +61,10 @@ kubectl -n "$WERF_NAMESPACE" port-forward service/werf-demo-development-werf-dem
 ```
 
 Open `http://localhost:8080` while the port-forward is running. The expected page title is `Werf Demo`.
+
+When the optional ingress settings above are enabled on the local K3d cluster,
+open `http://werf-demo.localhost:58088` instead. Ingress is disabled by default
+so other environments can choose their own controller and host name.
 
 ## Update Or Remove
 

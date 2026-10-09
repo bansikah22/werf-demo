@@ -39,5 +39,9 @@ spec:
             capabilities:
               drop:
                 - ALL
+              add:
+                - CHOWN
+                - SETGID
+                - SETUID
           resources:
             {{- toYaml .Values.resources | nindent 12 }}

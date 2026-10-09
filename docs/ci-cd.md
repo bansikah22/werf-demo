@@ -5,7 +5,7 @@
 The [verify workflow](../.github/workflows/verify.yml) runs on pull requests and `main` pushes using the pinned `ubuntu-24.04` runner. It performs these checks:
 
 1. Checks out the full Git history required by Werf.
-2. Installs the stable Werf v3 toolchain through its official setup action.
+2. Installs the verified stable Werf v2 toolchain through its official setup action.
 3. Renders the Helm chart using Werf's Helm wrapper.
 4. Runs `werf build --dev`, which builds the image without publishing it to a registry.
 

@@ -2,7 +2,7 @@
 
 ## Verification
 
-The [verify workflow](../.github/workflows/verify.yml) runs on pull requests and `main` pushes. It performs these checks:
+The [verify workflow](../.github/workflows/verify.yml) runs on pull requests and `main` pushes using the pinned `ubuntu-24.04` runner. It performs these checks:
 
 1. Checks out the full Git history required by Werf.
 2. Installs the stable Werf v3 toolchain through its official setup action.

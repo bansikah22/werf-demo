@@ -75,7 +75,7 @@ The deployment workflow uses GitHub's token to publish to GHCR. Ensure the repos
 
 ## Engineering Skills Adoption
 
-This demo follows the shared [engineering skills](https://github.com/bansikah22/engineering-skills): its [technology-currency workflow](https://github.com/bansikah22/engineering-skills/blob/master/workflows/technology-currency.md) records current sources and pins CI actions and the container base image. See [AGENTS.md](AGENTS.md) and the project documents in [docs](docs).
+This demo follows the shared [engineering skills](https://github.com/bansikah22/engineering-skills): its [technology-currency workflow](https://github.com/bansikah22/engineering-skills/blob/master/workflows/technology-currency.md) records current sources and pins CI actions and the container base image. See [AGENTS.md](AGENTS.md), [the integration guide](docs/engineering-skills-integration.md), and the project documents in [docs](docs).
 
 ## Official References
 

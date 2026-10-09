@@ -11,10 +11,10 @@ permissions:
 
 jobs:
   validate:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Check out source
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           fetch-depth: 0
 
@@ -22,7 +22,7 @@ jobs:
         uses: werf/trdl/actions/setup-app@2504624ea2798a206c277e8ebf250b495e3bab68 # v0.13.0
         with:
           preset: werf
-          group: "3"
+          group: "2"
           channel: stable
           force: false
 

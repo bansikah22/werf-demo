@@ -1,0 +1,5 @@
+project: werf-demo
+configVersion: 1
+---
+image: web
+dockerfile: Dockerfile

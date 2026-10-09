@@ -1,0 +1,44 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Target GitHub and Werf environment
+        required: true
+        default: development
+        type: choice
+        options:
+          - development
+          - staging
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  converge:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    steps:
+      - name: Check out source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Werf
+        uses: werf/trdl/actions/setup-app@2504624ea2798a206c277e8ebf250b495e3bab68 # v0.13.0
+        with:
+          preset: werf
+          group: "3"
+          channel: stable
+          force: false
+
+      - name: Build, publish, and deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WERF_ENV: ${{ inputs.environment }}
+          WERF_KUBECONFIG_BASE64: ${{ secrets.KUBE_CONFIG_BASE64 }}
+        run: |
+          . "$(werf ci-env github --as-file)"
+          werf converge

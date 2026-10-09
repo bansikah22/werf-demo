@@ -1,0 +1,33 @@
+name: Verify
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Werf
+        uses: werf/trdl/actions/setup-app@2504624ea2798a206c277e8ebf250b495e3bab68 # v0.13.0
+        with:
+          preset: werf
+          group: "3"
+          channel: stable
+          force: false
+
+      - name: Render Helm chart
+        run: werf helm template werf-demo .helm --namespace werf-demo-development
+
+      - name: Build the Werf image
+        run: werf build --dev
